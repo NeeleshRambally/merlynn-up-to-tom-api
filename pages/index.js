@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react'; // Add this line to import hooks from React
+import React, { useState, useEffect } from 'react';
 import ModelPicker from '../components/ModelPicker';
 import DrinkChoiceForm from '../components/DrinkChoiceForm';
 
 export default function Home() {
-  const [selectedModel, setSelectedModel] = useState('58d3bcf97c6b1644db73ad12');
+  const [selectedModel, setSelectedModel] = useState('5a8e7a36c627fb0007dd7249');
   const [decision, setDecision] = useState(null);
 
+  useEffect(() => {
+    console.log("Selected Model has changed:", selectedModel);
+  }, [selectedModel]);
+
   const renderDecision = (decision) => {
+    if (!decision) return null;
+
     return (
       <div className="mt-8 p-4 bg-gray-100 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">Decision:</h3>
@@ -54,9 +60,9 @@ export default function Home() {
     <div className="container mx-auto p-8">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-6 text-center">Model Selection</h1>
-        <ModelPicker onSelectModel={setSelectedModel} />
+        <ModelPicker onSelectModel={(model) => { setSelectedModel(model); setDecision(null); }} />
         <DrinkChoiceForm modelId={selectedModel} onDecision={setDecision} />
-        {decision && renderDecision(decision)}
+        {renderDecision(decision)}
       </div>
     </div>
   );

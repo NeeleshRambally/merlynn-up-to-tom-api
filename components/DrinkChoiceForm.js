@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchModelMetadata, queryModel } from '../lib/api';
 
 const DrinkChoiceForm = ({ modelId, onDecision }) => {
@@ -19,48 +19,9 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
     const result = await queryModel(modelId, inputVariables);
 
     if (result.success) {
-      try {
-        const response = await fetch('/api/saveRequestResponse', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            modelId,
-            inputVariables,
-            decision: result.data,
-            error: null,
-            createdAt: new Date(),
-          }),
-        });
-        const responseData = await response.json();
-        if (!responseData.success) {
-          console.error('Failed to save request and response:', responseData.error);
-        }
-      } catch (saveError) {
-        console.error('Failed to save request and response:', saveError);
-      }
-
       setError(null); // Clear any previous errors
       onDecision(result.data); // Pass the new data to the parent component
     } else {
-      try {
-        await fetch('/api/saveRequestResponse', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            modelId,
-            inputVariables,
-            decision: null,
-            error: result.error,
-            createdAt: new Date(),
-          }),
-        });
-      } catch (saveError) {
-        console.error('Failed to save request and response:', saveError);
-      }
       setError(result.error); // Set the error message
       onDecision(null); // Clear the decision block on error
     }
@@ -69,7 +30,8 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
   useEffect(() => {
     const loadMetadata = async () => {
       const data = await fetchModelMetadata(modelId);
-      setMetadata(data.data.attributes.metadata); // Adjust this line based on actual structure
+      console.log('Fetched metadata:', data); // Log metadata for debugging
+      setMetadata(data.data.attributes.metadata);
     };
     loadMetadata();
   }, [modelId]);
@@ -93,9 +55,10 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {metadata.attributes && metadata.attributes.map((variable) => (
           <div key={variable.name}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{variable.question}</label>
+            <label htmlFor={variable.name} className="block text-sm font-medium text-gray-700 mb-2">{variable.question}</label>
             <input
               type="text"
+              id={variable.name}
               name={variable.name}
               value={inputVariables[variable.name] || ''} // Ensure input field is cleared
               onChange={handleInputChange}
