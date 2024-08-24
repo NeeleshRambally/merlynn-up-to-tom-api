@@ -5,8 +5,8 @@ export default async function handler(req, res) {
     try {
       const client = new MongoClient(process.env.MONGODB_URI);
       await client.connect();
-      const db = client.db('yourDatabaseName'); // Replace with your database name
-      const collection = db.collection('requestResponses'); // Use your collection name
+      const db = client.db('tom_db'); 
+      const collection = db.collection('requestResponses');
 
       const result = await collection.insertOne(req.body);
 

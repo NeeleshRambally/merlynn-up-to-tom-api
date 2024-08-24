@@ -7,7 +7,7 @@ export default function Home() {
   const [decision, setDecision] = useState(null);
 
   useEffect(() => {
-    console.log("Selected Model has changed:", selectedModel);
+    console.debug("Selected Model has changed:", selectedModel);
   }, [selectedModel]);
 
   const renderDecision = (decision) => {
