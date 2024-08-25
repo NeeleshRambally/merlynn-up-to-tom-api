@@ -89,14 +89,14 @@ const BatchOperations = ({ modelId }) => {
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Batch Operations</h2>
-      
-      {/* Display Error Message at the Top */}
+       
+     
       {error && <div className="mb-4 text-red-500">Error: {error}</div>}
 
-      {/* Upload Batch File */}
+
       <div className="mb-6">
         <h3 className="text-lg font-semibold">Upload Batch File</h3>
-        <input type="file" accept=".csv" onChange={handleFileChange} />
+        <input aria-label="Upload Batch File" type="file" accept=".csv" onChange={handleFileChange} />
         <button
           onClick={handleBatchUpload}
           className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -112,7 +112,7 @@ const BatchOperations = ({ modelId }) => {
         )}
       </div>
 
-      {/* Get All Batches */}
+
       <div className="mb-6">
         <h3 className="text-lg font-semibold">List Running Jobs</h3>
         <button
@@ -159,7 +159,7 @@ const BatchOperations = ({ modelId }) => {
         )}
       </div>
 
-      {/* Retrieve Batch Status */}
+  
       <div className="mb-6">
         <h3 className="text-lg font-semibold">Retrieve Processed Batch</h3>
         <input
@@ -184,7 +184,6 @@ const BatchOperations = ({ modelId }) => {
         )}
       </div>
 
-      {/* Delete Batch */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold">Delete Batch</h3>
         <input
