@@ -5,6 +5,8 @@ export default async function handler(req, res) {
     try {
       const client = new MongoClient(process.env.MONGODB_URI);
       await client.connect();
+      
+      //TODO [Enhancement]: This should be read from the env if needed or schema
       const db = client.db('tom_db'); 
       const collection = db.collection('requestResponses');
 

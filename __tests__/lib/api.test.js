@@ -1,9 +1,8 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { fetchModelMetadata, queryModel, fetchAllModels } from '../../lib/api';  
-const API_KEY = '9307bfd5fa011428ff198bb37547f979';
-const BASE_URL = 'https://api.up2tom.com/v3';
 
+  
 describe('API Functions', () => {
   let mock;
 
@@ -24,7 +23,8 @@ describe('API Functions', () => {
       const modelId = 'test-model-id';
       const mockResponse = { data: { id: modelId, attributes: { name: 'Test Model' } } };
 
-      mock.onGet(`${BASE_URL}/models/${modelId}`).reply(200, mockResponse);
+      // Mocking the exact URL that would be called in the API function
+      mock.onGet(`${process.env.NEXT_PUBLIC_BASE_URL}/models/${modelId}`).reply(200, mockResponse);
 
       const result = await fetchModelMetadata(modelId);
 
@@ -34,7 +34,7 @@ describe('API Functions', () => {
     it('should handle errors while fetching model metadata', async () => {
       const modelId = 'invalid-model-id';
 
-      mock.onGet(`${BASE_URL}/models/${modelId}`).reply(404);
+      mock.onGet(`${process.env.NEXT_PUBLIC_BASE_URL}/models/${modelId}`).reply(404);
 
       await expect(fetchModelMetadata(modelId)).rejects.toThrow();
     });
@@ -46,7 +46,7 @@ describe('API Functions', () => {
       const inputVariables = { INPUTVAR1: 'value1', INPUTVAR2: 'value2' };
       const mockResponse = { data: { id: 'decision-id', attributes: { decision: 'Test Decision' } } };
 
-      mock.onPost(`${BASE_URL}/decision/${modelId}`).reply(200, mockResponse);
+      mock.onPost(`${process.env.NEXT_PUBLIC_BASE_URL}/decision/${modelId}`).reply(200, mockResponse);
 
       const result = await queryModel(modelId, inputVariables);
 
@@ -58,7 +58,7 @@ describe('API Functions', () => {
       const modelId = 'test-model-id';
       const inputVariables = { INPUTVAR1: 'value1', INPUTVAR2: 'value2' };
 
-      mock.onPost(`${BASE_URL}/decision/${modelId}`).reply(422, { errors: [{ detail: 'Invalid input' }] });
+      mock.onPost(`${process.env.NEXT_PUBLIC_BASE_URL}/decision/${modelId}`).reply(422, { errors: [{ detail: 'Invalid input' }] });
 
       const result = await queryModel(modelId, inputVariables);
 
@@ -71,7 +71,7 @@ describe('API Functions', () => {
     it('should fetch all models successfully', async () => {
       const mockResponse = { data: [{ id: 'model1' }, { id: 'model2' }] };
 
-      mock.onGet(`${BASE_URL}/models`).reply(200, mockResponse);
+      mock.onGet(`${process.env.NEXT_PUBLIC_BASE_URL}/models`).reply(200, mockResponse);
 
       const result = await fetchAllModels();
 
@@ -79,7 +79,7 @@ describe('API Functions', () => {
     });
 
     it('should handle errors while fetching all models', async () => {
-      mock.onGet(`${BASE_URL}/models`).reply(503);
+      mock.onGet(`${process.env.NEXT_PUBLIC_BASE_URL}/models`).reply(503);
 
       await expect(fetchAllModels()).rejects.toThrow();
     });
