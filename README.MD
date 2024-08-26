@@ -82,15 +82,19 @@ install mongosh
     ```bash
     show dbs
     ```
+
     ```bash
     use yourDatabaseName
     ```
+
     ```bash
     show collections
     ```
+
     ```bash
     db.requestResponses.find().pretty()
     ```
+    
 
 
 ## CI/CD pipeline 
@@ -99,7 +103,8 @@ install mongosh
     that only builds the application and ensures all tests are passing it can be extended to deploy and also set up env veraibles securly.
 
     The workflow can be found in `/.guthub/node.js.yml`
-    The workflow does currently run and this can be found :https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
+    The workflow does currently run and this can be found :
+    https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
  
 
     
