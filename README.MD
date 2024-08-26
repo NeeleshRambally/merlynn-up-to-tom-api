@@ -148,5 +148,28 @@ When deploying this application, it is essential to consider the following secur
 
 ## Improvements 
 Given the timelimit, there could be a few more improvements on the code base: 
-1. More unit tests to get better code coverage 
-2. Set up deployment environment on aws , azure or other platform to deploy and test the application
+
+1. **Enhanced Security Practices:**
+
+- Environment Variables Management: Implement a more robust method of managing environment variables, such as using a secrets manager (e.g., AWS Secrets Manager, Azure Key Vault) instead of storing sensitive information like API keys in .env files.
+- Data Encryption: Ensure that all sensitive data, both at rest and in transit, is encrypted. This includes API keys, database credentials, and any personal user data.
+- Access Control: Implement role-based access control (RBAC) within the application to ensure that only authorized users have access to sensitive endpoints and data.
+
+2. **Automated Testing and Continuous Integration:**
+- Test Coverage: Increase test coverage by writing more unit tests, integration tests, and end-to-end tests. This will help catch bugs earlier in the development process. 
+- CI/CD Pipeline Enhancements: Improve the CI/CD pipeline by adding stages for running security tests (e.g., SAST tools), performance tests, and deploying to staging environments before production.
+
+3. **Performance Optimization:**
+- Caching: Implement caching mechanisms where appropriate, such as caching responses from the API or database queries that are expensive or frequently accessed.
+- Lazy Loading: Implement lazy loading for non-essential resources to speed up initial load times, especially for large datasets or images.
+- API Rate Limiting: Add rate limiting to the API to prevent abuse and ensure fair usage across users.
+
+4. **User Experience Improvements:**
+- Responsive Design: Ensure that the application is fully responsive and works well on all device sizes, from mobile phones to large desktop screens.
+- User Onboarding: Implement a user-friendly onboarding process with helpful tooltips and guides for first-time users.
+- Accessibility: Improve the app’s accessibility by following WCAG (Web Content Accessibility Guidelines), making it usable for people with disabilities.
+
+5. **Logging and Monitoring:**
+- Enhanced Logging: Implement a more detailed logging mechanism that captures all critical events, including errors, warnings, and user actions, which can help in debugging and auditing.
+- Real-time Monitoring: Set up real-time monitoring and alerting for the application using tools like Prometheus, Grafana, or New Relic. This can help in identifying and addressing issues before they affect users.
+
