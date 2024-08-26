@@ -122,7 +122,22 @@ This application provides the following functions:
     The workflow can be found in `/.guthub/node.js.yml`
     The workflow does currently run and this can be found :
     https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
- 
+
+## Docker Image
+    I have created a docker file for the application and this can also be used to run the application locally using 
+
+   1. **Build Docker Image:**
+
+    ```bash
+    docker build --build-arg ENV_FILE=.env.local -t tom-image .
+    ```
+    In this case you pass in the local env file for running locally but can be environment file for dev or prod environemtns too
+
+    2. **Start the app:**
+
+    ```bash
+    docker run -p 3000:3000 tom-image
+    ```
 
     
 
