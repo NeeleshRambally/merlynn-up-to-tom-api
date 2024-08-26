@@ -114,25 +114,30 @@ This application provides the following functions:
 - **Delete Batch File:** Deletes a specific batch file.
 - **Persistence:** Saves all requests and responese for models to a mongoDb collection.
 
-## CI/CD pipeline 
-    
-    Currently you app will run a ci/cd piplein using github actions ,this is currently a simply pipeline 
-    that only builds the application and ensures all tests are passing it can be extended to deploy and also set up env veraibles securly.
+# CI/CD pipeline 
 
-    The workflow can be found in `/.guthub/node.js.yml`
-    The workflow does currently run and this can be found :
-    https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
+Currently you app will run a ci/cd piplein using github actions ,this is currently a simply pipeline 
+that only builds the application and ensures all tests are passing it can be 
+extended to deploy and also set up env veraibles securly.
+
+The workflow can be found in `/.guthub/node.js.yml`
+The workflow does currently run and this can be found :
+https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
 
 ## Docker Image
-    I have created a docker file for the application and this can also be used to run the application locally using - this can also be used in the CI/CD pipeline to deploy the image to any set up environment
+
+I have created a docker file for the application and this can also be used to
+run the application locally using - this can also be used in the CI/CD pipeline 
+to deploy the image to any set up environment
 
 1. **Build Docker Image:**
 
     ```bash
     docker build --build-arg ENV_FILE=.env.local -t tom-image .
     ```
-    
-    In this case you pass in the local env file for running locally but can be environment file for dev or prod environemtns too
+
+    In this case you pass in the local env file for running locally but can be environment 
+    file for dev or prod environemtns too
 
 2. **Start the app:**
 
