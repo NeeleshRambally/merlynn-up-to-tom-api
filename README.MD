@@ -103,7 +103,16 @@ install mongosh
     db.requestResponses.find().pretty()
     ```
 
+This application provides the following functions:
 
+- **Fetch Model Metadata:** Retrieves metadata for a specific model using the TOM API.
+- **Query Model:** Submits input variables to a model and retrieves the decision data.
+- **Fetch All Models:** Retrieves a list of all available models.
+- **Upload Batch File:** Uploads a CSV file for batch processing through the TOM API.
+- **List Batch Files and Running Jobs:** Retrieves a list of batch files and currently running jobs for a specific model.
+- **Retrieve Processed Batch File:** Downloads a processed batch file.
+- **Delete Batch File:** Deletes a specific batch file.
+- **Persistence:** Saves all requests and responese for models to a mongoDb collection.
 
 ## CI/CD pipeline 
     
