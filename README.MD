@@ -77,20 +77,27 @@ Ensure you have the following installed on your machine:
 
 
 ## Viewing db data
+
 install mongosh
 
+1. **Show databases:**
 
     ```bash
     show dbs
     ```
 
+2. **Select db to be used:**
+
     ```bash
     use yourDatabaseName
     ```
 
+3. **Show all collections in db:**
+
     ```bash
     show collections
     ```
+4. **Select all from the db:**
 
     ```bash
     db.requestResponses.find().pretty()
