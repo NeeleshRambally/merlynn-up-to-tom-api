@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 const RequestResponseSchema = new mongoose.Schema({
   modelId: { type: String, required: true },
   inputVariables: { type: Map, of: String, required: true },
-  decision: { type: mongoose.Schema.Types.Mixed, required: false }, // Decision can be an object or null
-  error: { type: String, required: false }, // Store error message if any
+  decision: { type: mongoose.Schema.Types.Mixed, required: false },
+  error: { type: String, required: false }, 
   createdAt: { type: Date, default: Date.now },
 });
 

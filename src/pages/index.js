@@ -63,7 +63,6 @@ export default function Home() {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-6 text-center">Up 2 Tom API</h1>
         
-        {/* Tab Navigation */}
         <div className="mt-6 flex border-b">
           <button
             onClick={() => setActiveTab('individual')}
@@ -79,24 +78,19 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Tab Content */}
         <div className="mt-4">
           {activeTab === 'individual' && (
             <>
-              {/* Model Picker Dropdown */}
               <ModelPicker onSelectModel={(model) => { setSelectedModel(model); setDecision(null); }} />
 
-              {/* Form to Query Individual Decision */}
               <DrinkChoiceForm modelId={selectedModel} onDecision={setDecision} />
 
-              {/* Display Individual Decision */}
               {renderDecision(decision)}
             </>
           )}
 
           {activeTab === 'batch' && (
             <>
-              {/* Batch Query Functionality */}
               <BatchOperations modelId={selectedModel} />
             </>
           )}

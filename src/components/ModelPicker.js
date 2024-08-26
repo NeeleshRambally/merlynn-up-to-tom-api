@@ -12,7 +12,6 @@ const ModelPicker = ({ onSelectModel }) => {
       const modelsList = data.data || [];
       setModels(modelsList);
 
-      // Only set the default model once when the models are first loaded
       if (modelsList.length > 0 && !selectedModel) {
         setSelectedModel(modelsList[0].id);  // Default to the first model
         onSelectModel(modelsList[0].id);

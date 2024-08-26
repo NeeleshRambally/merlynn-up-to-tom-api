@@ -1,11 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import DrinkChoiceForm from '../../components/DrinkChoiceForm';
-import { fetchModelMetadata, queryModel } from '../../lib/api';
+import DrinkChoiceForm from '../../src/components/DrinkChoiceForm';
+import { fetchModelMetadata, queryModel } from '../../src/lib/api';
 
 // Mock the API calls
-jest.mock('../../lib/api', () => ({
+jest.mock('../../src/lib/api', () => ({
   fetchModelMetadata: jest.fn(),
   queryModel: jest.fn(),
 }));
@@ -85,28 +85,21 @@ describe('DrinkChoiceForm', () => {
   
     render(<DrinkChoiceForm modelId="test-model" onDecision={mockOnDecision} />);
   
-    // Wait for the metadata to load
     await waitFor(() => expect(screen.getByText('Drink Choice')).toBeInTheDocument());
   
-    // Fill in the form fields
     fireEvent.change(screen.getByLabelText('Temperature?'), { target: { value: '25' } });
     fireEvent.change(screen.getByLabelText('Age?'), { target: { value: '30' } });
   
-    // Submit the form
     fireEvent.click(screen.getByText('Get Decision'));
   
-    // Ensure the API call was made
     await waitFor(() => {
       expect(queryModel).toHaveBeenCalledWith('test-model', { INPUTVAR1: '25', INPUTVAR2: '30' });
     });
   
-    // Ensure the onDecision callback was called with `null` due to the error
     expect(mockOnDecision).toHaveBeenCalledWith(null);
   
-    // Debug to see the actual DOM structure
     screen.debug();
   
-    // Check for error message
     await waitFor(() => {
       expect(screen.queryByText((content, element) => {
         return content.includes('Invalid input');

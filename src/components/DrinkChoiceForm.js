@@ -13,31 +13,29 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Reset error state before making a new request
-    onDecision(null); // Clear any previous decision
-
+    setError(null); 
+    onDecision(null); 
     const result = await queryModel(modelId, inputVariables);
 
     if (result.success) {
-      setError(null); // Clear any previous errors
-      onDecision(result.data); // Pass the new data to the parent component
+      setError(null); 
+      onDecision(result.data); 
     } else {
-      setError(result.error); // Set the error message
-      onDecision(null); // Clear the decision block on error
+      setError(result.error); 
+      onDecision(null); 
     }
   };
 
   useEffect(() => {
     const loadMetadata = async () => {
       const data = await fetchModelMetadata(modelId);
-      console.log('Fetched metadata:', data); // Log metadata for debugging
+      console.log('Fetched metadata:', data); 
       setMetadata(data.data.attributes.metadata);
     };
     loadMetadata();
   }, [modelId]);
 
   useEffect(() => {
-    // Clear input fields and error message when the model changes
     setInputVariables({});
     setError(null);
   }, [modelId]);
@@ -60,7 +58,7 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
               type="text"
               id={variable.name}
               name={variable.name}
-              value={inputVariables[variable.name] || ''} // Ensure input field is cleared
+              value={inputVariables[variable.name] || ''}
               onChange={handleInputChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"

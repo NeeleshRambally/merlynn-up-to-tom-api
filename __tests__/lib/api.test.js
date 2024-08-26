@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { fetchModelMetadata, queryModel, fetchAllModels } from '../../lib/api';  
+import { fetchModelMetadata, queryModel, fetchAllModels } from '../../src/lib/api';  
 
   
 describe('API Functions', () => {
