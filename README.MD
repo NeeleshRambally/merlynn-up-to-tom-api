@@ -79,6 +79,7 @@ Ensure you have the following installed on your machine:
 ## Viewing db data
 install mongosh
 
+
     ```bash
     show dbs
     ```
@@ -94,7 +95,7 @@ install mongosh
     ```bash
     db.requestResponses.find().pretty()
     ```
-    
+
 
 
 ## CI/CD pipeline 
