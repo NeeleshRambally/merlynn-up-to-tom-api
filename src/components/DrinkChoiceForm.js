@@ -15,8 +15,29 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
     e.preventDefault();
     setError(null); 
     onDecision(null); 
+  
+    // Query the model to get the decision
     const result = await queryModel(modelId, inputVariables);
-
+  
+    // Save the request and response to MongoDB
+    try {
+      await fetch('/api/saveRequestResponse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          modelId,
+          inputVariables,
+          decision: result.success ? result.data : null,
+          error: result.success ? null : result.error,
+        }),
+      });
+    } catch (saveError) {
+      console.error('Failed to save request and response:', saveError);
+    }
+  
+    // Handle the result
     if (result.success) {
       setError(null); 
       onDecision(result.data); 
@@ -25,6 +46,7 @@ const DrinkChoiceForm = ({ modelId, onDecision }) => {
       onDecision(null); 
     }
   };
+  
 
   useEffect(() => {
     const loadMetadata = async () => {
