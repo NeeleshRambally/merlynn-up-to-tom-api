@@ -75,11 +75,56 @@ Ensure you have the following installed on your machine:
 
     This will create an optimized production build of your application.
 
+
+## Viewing db data
+install mongosh
+
+    ```bash
+    show dbs
+    ```
+    ```bash
+    use yourDatabaseName
+    ```
+    ```bash
+    show collections
+    ```
+    ```bash
+    db.requestResponses.find().pretty()
+    ```
+
+
 ## CI/CD pipeline 
     
     Currently you app will run a ci/cd piplein using github actions ,this is currently a simply pipeline 
     that only builds the application and ensures all tests are passing it can be extended to deploy and also set up env veraibles securly.
 
     The workflow can be found in `/.guthub/node.js.yml`
+    The workflow does currently run and this can be found :https://github.com/NeeleshRambally/merlynn-up-to-tom-api/actions
+ 
 
     
+
+## Security Considerations
+
+When deploying this application, it is essential to consider the following security practices to protect sensitive data and maintain the integrity of the application:
+
+### Environment Variables Security
+- **Keep environment files out of version control:** Ensure that files like `.env` or `.env.local` are not committed to your version control system. Use `.gitignore` to exclude them. (These have been added to the current repository for ease of testing)
+- **Use environment-specific configurations:** Separate your development, testing, and production configurations to avoid exposing sensitive information in the wrong environment.
+- **Encrypt sensitive environment variables:** For production, consider using a secrets management service like AWS Secrets Manager, Azure Key Vault, or HashiCorp Vault to manage your API keys and database connection strings securely.
+
+### Database Security
+- **Restrict database access:** Ensure that only necessary services and users have access to the database. Use network-level security measures like firewalls and VPNs to restrict access.
+- **Use strong authentication and encryption:** Enforce strong password policies for database users and use SSL/TLS encryption for connections to your database.
+- **Regularly update and patch your database:** Keep your database software up to date with the latest security patches to protect against vulnerabilities.
+
+### API Key Security
+- **Limit the scope of API keys:** Generate API keys with the minimum necessary permissions and rotate them regularly.
+- **Monitor API key usage:** Implement monitoring and alerting for unusual API key usage patterns, which could indicate a security breach.
+- **Use rate limiting:** Protect your API from abuse by implementing rate limiting to control the number of requests that can be made within a specific timeframe.
+
+
+## Improvements 
+Given the timelimit, there could be a few more improvements on the code base: 
+1. More unit tests to get better code coverage 
+2. Set up deployment environment on aws , azure or other platform to deploy and test the application
