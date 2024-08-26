@@ -89,7 +89,7 @@ install mongosh
 2. **Select db to be used:**
 
     ```bash
-    use yourDatabaseName
+    use tom_db
     ```
 
 3. **Show all collections in db:**
